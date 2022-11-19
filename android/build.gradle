@@ -5,18 +5,27 @@ buildscript {
     apply from: './dependencies.gradle'
     repositories {
         google()
-        jcenter()
+        maven {
+            url 'https://maven.fabric.io/public'
+        }
+        mavenCentral()
+        gradlePluginPortal()
+
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.5.0'
+        classpath 'com.android.tools.build:gradle:7.0.4'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+
     }
 }
 
 rootProject.allprojects {
     repositories {
         google()
-        jcenter()
+        maven { url 'https://maven.google.com' }
+        mavenCentral()
+
     }
 }
 
@@ -32,8 +41,9 @@ android {
         disable 'InvalidPackage'
     }
 }
+
 dependencies {
-    implementation "com.helpscout:beacon-ui:$beaconVersion"
+    implementation "com.helpscout:beacon:$beaconVersion"
+    implementation 'androidx.appcompat:appcompat:1.5.1'
     implementation 'androidx.core:core-ktx:1.2.0'
-    implementation 'androidx.appcompat:appcompat:1.1.0'
 }
